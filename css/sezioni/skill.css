@@ -1,0 +1,150 @@
+.skills-section {
+  position: relative;
+  z-index: 1;
+  padding: 8rem 0;
+  overflow: hidden;
+}
+.skills-header {
+  padding: 0 3rem;
+  margin-bottom: 4rem;
+}
+
+.skill-lanes {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.lane {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+.lane-label {
+  width: 180px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 3rem;
+  font-family: var(--mono);
+  font-size: 0.63rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.ll-be {
+  color: var(--violet2);
+}
+.ll-fe {
+  color: var(--cyan);
+}
+.ll-mo {
+  color: var(--rose);
+}
+.ll-db {
+  color: var(--emerald);
+}
+
+.lane-track {
+  flex: 1;
+  display: flex;
+  gap: 0.7rem;
+  overflow-x: auto;
+  padding: 0.5rem 0;
+  scrollbar-width: none;
+}
+.lane-track::-webkit-scrollbar {
+  display: none;
+}
+.lane-track-inner {
+  display: flex;
+  gap: 0.7rem;
+}
+
+.skill-pill {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.03em;
+  padding: 0.65rem 1.3rem;
+  border-radius: 100px;
+  border: 1px solid;
+  white-space: nowrap;
+  transition: all 0.25s;
+  cursor: default;
+  backdrop-filter: blur(12px);
+}
+.sp-be {
+  color: var(--violet2);
+  border-color: rgba(167, 139, 250, 0.25);
+  background: rgba(167, 139, 250, 0.07);
+}
+.sp-be:hover {
+  background: rgba(167, 139, 250, 0.18);
+  border-color: var(--violet2);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(167, 139, 250, 0.2);
+}
+.sp-fe {
+  color: var(--cyan);
+  border-color: rgba(6, 182, 212, 0.25);
+  background: rgba(6, 182, 212, 0.07);
+}
+.sp-fe:hover {
+  background: rgba(6, 182, 212, 0.18);
+  border-color: var(--cyan);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(6, 182, 212, 0.2);
+}
+.sp-mo {
+  color: var(--rose);
+  border-color: rgba(244, 63, 142, 0.25);
+  background: rgba(244, 63, 142, 0.07);
+}
+.sp-mo:hover {
+  background: rgba(244, 63, 142, 0.18);
+  border-color: var(--rose);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(244, 63, 142, 0.2);
+}
+.sp-db {
+  color: var(--emerald);
+  border-color: rgba(16, 185, 129, 0.25);
+  background: rgba(16, 185, 129, 0.07);
+}
+.sp-db:hover {
+  background: rgba(16, 185, 129, 0.18);
+  border-color: var(--emerald);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.2);
+}
+
+.pill-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+.sp-be .pill-dot {
+  background: var(--violet2);
+  box-shadow: 0 0 8px var(--violet2);
+}
+.sp-fe .pill-dot {
+  background: var(--cyan);
+  box-shadow: 0 0 8px var(--cyan);
+}
+.sp-mo .pill-dot {
+  background: var(--rose);
+  box-shadow: 0 0 8px var(--rose);
+}
+.sp-db .pill-dot {
+  background: var(--emerald);
+  box-shadow: 0 0 8px var(--emerald);
+}
+
+.lane-end {
+  width: 3rem;
+  flex-shrink: 0;
+  background: linear-gradient(90deg, transparent, var(--bg));
+}

@@ -1,0 +1,32 @@
+@import url("variabili.css");
+@import url("sezioni/nav.css ");
+@import url("card/hero.css");
+@import url("sezioni/about.css");
+@import url("sezioni/skill.css");
+@import url("sezioni/project.css");
+@import url("sezioni/contact.css");
+@import url("sezioni/footer.css");
+@import url("background.css");
+@import url("responsive/responsive.css");
+@import url("action/scroll-reveal.css");
+@import url("action/cursor.css");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--display);
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  cursor: none;
+}

@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Federico — Developer & AI Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Clash+Display:wght@400;500;600;700&family=Bricolage+Grotesque:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/main.css" />
+  </head>
+  <body>
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="ring"></div>
+
+    <!-- BG -->
+    <div class="scene">
+      <div class="scene-grid"></div>
+      <div class="orb o1"></div>
+      <div class="orb o2"></div>
+      <div class="orb o3"></div>
+    </div>
+
+    <!-- NAV -->
+    <nav>
+      <span class="nav-logo">// federico.dev</span>
+      <div class="nav-center">
+        <a href="#about">About</a>
+        <a href="#skills">Stack</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="nav-right">
+        <span class="nav-dot"></span>
+        <span class="nav-status">Available</span>
+      </div>
+    </nav>
+
+    <!-- ── HERO ── -->
+    <div class="hero">
+      <div class="hero-left">
+        <div class="hero-eyebrow">
+          <span class="hero-eyebrow-line"></span>
+          Full Stack Developer & AI Engineer
+        </div>
+        <h1 class="hero-title">
+          <span class="outline">Federico</span>
+          <span class="line2">Builds.</span>
+        </h1>
+        <p class="hero-desc">
+          // Python · Java SE/EE · Spring Boot · Node.js<br />
+          // Angular · HTML · CSS · JavaScript · Swift<br />
+          // MySQL · REST API · AI & Machine Learning
+        </p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn-primary">View Projects</a>
+          <a href="#contact" class="btn-link">
+            Get in touch
+            <svg
+              width="14"
+              height="14"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="float-card">
+          <div class="fc-label">Degree Level</div>
+          <div class="fc-value v-purple">EQF 6</div>
+          <div class="fc-sub">Computer Engineering & AI — 180 ECTS</div>
+        </div>
+        <div class="float-card">
+          <div class="fc-label">Tech Stack</div>
+          <div class="fc-tags">
+            <span class="fc-tag">Java</span><span class="fc-tag">Spring</span>
+            <span class="fc-tag">Python</span
+            ><span class="fc-tag">Angular</span>
+            <span class="fc-tag">Swift</span><span class="fc-tag">Node</span>
+            <span class="fc-tag">MySQL</span>
+          </div>
+        </div>
+        <div class="float-card">
+          <div class="fc-label">Status</div>
+          <div
+            class="fc-value v-cyan"
+            style="font-size: 1.1rem; font-weight: 600"
+          >
+            Open to Work
+          </div>
+          <div class="fc-sub">Full Stack · AI · Mobile · Cloud</div>
+        </div>
+      </div>
+
+      <div class="hero-bottom">
+        <div class="scroll-hint">
+          <span class="scroll-line"></span>
+          scroll to explore
+        </div>
+        <div class="hero-stack">
+          <span class="stack-item">Backend</span>
+          <span class="stack-sep">·</span>
+          <span class="stack-item">Frontend</span>
+          <span class="stack-sep">·</span>
+          <span class="stack-item">Mobile</span>
+          <span class="stack-sep">·</span>
+          <span class="stack-item">AI/ML</span>
+          <span class="stack-sep">·</span>
+          <span class="stack-item">Database</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── ABOUT ── -->
+    <div class="section" id="about">
+      <div class="section-header reveal">
+        <div>
+          <span class="sec-num">01 — About</span>
+          <h2 class="sec-title">Who I Am</h2>
+        </div>
+        <p class="sec-desc">
+          Sviluppatore full stack con focus su AI, cloud e applicazioni moderne.
+        </p>
+      </div>
+
+      <div class="bento">
+        <div class="bento-card bc-bio reveal">
+          <p class="bio-text">
+            Sono uno studente di
+            <strong>Computer Engineering & Artificial Intelligence</strong> con
+            una visione a 360°: backend enterprise con
+            <strong>Java e Spring</strong>, frontend reattivi con
+            <strong>Angular</strong>, mobile iOS con <strong>Swift</strong>,
+            logica server-side con <strong>Node.js</strong>, e database
+            relazionali con <strong>MySQL</strong>.<br /><br />
+            Il mio percorso mi ha portato a costruire applicazioni complete
+            end-to-end, integrando ogni livello dello stack con un approccio
+            orientato ai dati, alle performance e alla scalabilità.
+          </p>
+        </div>
+        <div
+          class="bento-card bc-stat1 reveal"
+          style="
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+          "
+        >
+          <div class="big-num purple">180</div>
+          <div class="card-label">ECTS Credits</div>
+        </div>
+        <div
+          class="bento-card bc-stat2 reveal"
+          style="
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+          "
+        >
+          <div class="big-num rose">EQF6</div>
+          <div class="card-label">Degree Level</div>
+        </div>
+        <div
+          class="bento-card bc-stat3 reveal"
+          style="
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+          "
+        >
+          <div class="big-num cyan">10+</div>
+          <div class="card-label">Tech</div>
+        </div>
+        <div class="bento-card bc-quote reveal">
+          <div class="quote-mark">"</div>
+          <p class="quote-text">
+            Il codice migliore è quello che risolve problemi reali con eleganza
+            e semplicità.
+          </p>
+        </div>
+        <div class="bento-card bc-img reveal">
+          <div class="avatar-placeholder">F</div>
+        </div>
+        <div class="bento-card bc-links reveal">
+          <div class="card-label" style="margin-bottom: 1rem">Connect</div>
+          <div class="social-list">
+            <a
+              href="https://www.linkedin.com/in/federico-cresci-b5853830b/"
+              class="social-item"
+              target="_blank"
+            >
+              <span class="social-icon si-li">in</span> LinkedIn
+            </a>
+            <a
+              href="https://github.com/federico-dot"
+              class="social-item"
+              target="_blank"
+            >
+              <span class="social-icon si-gh">
+                <svg
+                  width="14"
+                  height="14"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.49.5.09.66-.22.66-.48v-1.7C6.73 19.91 6.14 18 6.14 18c-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.99 1.03-2.69-.1-.26-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 6.8c.85 0 1.71.11 2.51.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.38.1 2.64.64.7 1.03 1.6 1.03 2.69 0 3.85-2.34 4.7-4.57 4.95.36.31.68.92.68 1.85v2.74c0 .27.16.58.67.48A10.01 10.01 0 0 0 22 12c0-5.52-4.48-10-10-10z"
+                  />
+                </svg>
+              </span>
+              GitHub
+            </a>
+            <a href="mailto:federicocresci63coll@gmail.com" class="social-item">
+              <span class="social-icon si-em">✉</span> Email
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SKILLS ── -->
+    <div class="skills-section" id="skills">
+      <div class="skills-header reveal">
+        <span class="sec-num">02 — Stack</span>
+        <h2 class="sec-title">Tech Stack</h2>
+      </div>
+
+      <div class="skill-lanes">
+        <div class="lane reveal">
+          <span class="lane-label ll-be">Backend</span>
+          <div class="lane-track">
+            <div class="lane-track-inner">
+              <span class="skill-pill sp-be"
+                ><span class="pill-dot"></span>Python</span
+              >
+              <span class="skill-pill sp-be"
+                ><span class="pill-dot"></span>Java SE</span
+              >
+              <span class="skill-pill sp-be"
+                ><span class="pill-dot"></span>Java EE</span
+              >
+              <span class="skill-pill sp-be"
+                ><span class="pill-dot"></span>Spring</span
+              >
+              <span class="skill-pill sp-be"
+                ><span class="pill-dot"></span>Spring Boot</span
+              >
+              <span class="skill-pill sp-be"
+                ><span class="pill-dot"></span>Node.js</span
+              >
+              <span class="skill-pill sp-be"
+                ><span class="pill-dot"></span>REST API</span
+              >
+              <span class="skill-pill sp-be"
+                ><span class="pill-dot"></span>OOP</span
+              >
+            </div>
+          </div>
+          <div class="lane-end"></div>
+        </div>
+
+        <div class="lane reveal">
+          <span class="lane-label ll-fe">Frontend</span>
+          <div class="lane-track">
+            <div class="lane-track-inner">
+              <span class="skill-pill sp-fe"
+                ><span class="pill-dot"></span>HTML5</span
+              >
+              <span class="skill-pill sp-fe"
+                ><span class="pill-dot"></span>CSS3</span
+              >
+              <span class="skill-pill sp-fe"
+                ><span class="pill-dot"></span>JavaScript</span
+              >
+              <span class="skill-pill sp-fe"
+                ><span class="pill-dot"></span>TypeScript</span
+              >
+              <span class="skill-pill sp-fe"
+                ><span class="pill-dot"></span>Angular</span
+              >
+              <span class="skill-pill sp-fe"
+                ><span class="pill-dot"></span>Responsive Design</span
+              >
+            </div>
+          </div>
+          <div class="lane-end"></div>
+        </div>
+
+        <div class="lane reveal">
+          <span class="lane-label ll-mo">Mobile</span>
+          <div class="lane-track">
+            <div class="lane-track-inner">
+              <span class="skill-pill sp-mo"
+                ><span class="pill-dot"></span>Swift</span
+              >
+              <span class="skill-pill sp-mo"
+                ><span class="pill-dot"></span>iOS Development</span
+              >
+              <span class="skill-pill sp-mo"
+                ><span class="pill-dot"></span>Xcode</span
+              >
+              <span class="skill-pill sp-mo"
+                ><span class="pill-dot"></span>UIKit</span
+              >
+            </div>
+          </div>
+          <div class="lane-end"></div>
+        </div>
+
+        <div class="lane reveal">
+          <span class="lane-label ll-db">Database</span>
+          <div class="lane-track">
+            <div class="lane-track-inner">
+              <span class="skill-pill sp-db"
+                ><span class="pill-dot"></span>MySQL</span
+              >
+              <span class="skill-pill sp-db"
+                ><span class="pill-dot"></span>SQL</span
+              >
+              <span class="skill-pill sp-db"
+                ><span class="pill-dot"></span>Database Design</span
+              >
+              <span class="skill-pill sp-db"
+                ><span class="pill-dot"></span>JPA / Hibernate</span
+              >
+            </div>
+          </div>
+          <div class="lane-end"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PROJECTS ── -->
+    <div class="projects-section" id="projects">
+      <div class="section-header reveal">
+        <div>
+          <span class="sec-num">03 — Projects</span>
+          <h2 class="sec-title">Selected Work</h2>
+        </div>
+        <p class="sec-desc">Progetti reali costruiti con lo stack completo.</p>
+      </div>
+
+      <div class="projects-grid">
+        <div class="proj p1 reveal">
+          <span class="proj-num">01</span>
+          <div class="proj-top">
+            <span class="proj-cat">Full Stack</span>
+            <span class="proj-arrow">↗</span>
+          </div>
+          <div class="proj-body">
+            <h3>Progetto Full Stack #1</h3>
+            <p class="proj-desc">
+              Applicazione enterprise completa con backend Java Spring Boot,
+              frontend Angular e database MySQL. Autenticazione JWT, API REST e
+              dashboard amministrativa.
+            </p>
+            <div class="proj-tags">
+              <span class="ptag">Java</span><span class="ptag">Spring Boot</span
+              ><span class="ptag">Angular</span><span class="ptag">MySQL</span
+              ><span class="ptag">JWT</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj p2 reveal">
+          <div class="proj-top">
+            <span class="proj-cat">Backend API</span>
+            <span class="proj-arrow">↗</span>
+          </div>
+          <div class="proj-body">
+            <h3>REST API Node.js</h3>
+            <p class="proj-desc">
+              API scalabile con Node.js, endpoint documentati e integrazione
+              MySQL.
+            </p>
+            <div class="proj-tags">
+              <span class="ptag">Node.js</span><span class="ptag">Express</span
+              ><span class="ptag">MySQL</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj p3 reveal">
+          <div class="proj-top">
+            <span class="proj-cat">Mobile iOS</span>
+            <span class="proj-arrow">↗</span>
+          </div>
+          <div class="proj-body">
+            <h3>App Swift</h3>
+            <div class="proj-tags">
+              <span class="ptag">Swift</span><span class="ptag">Xcode</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj p4 reveal">
+          <div class="proj-top">
+            <span class="proj-cat">Frontend</span>
+            <span class="proj-arrow">↗</span>
+          </div>
+          <div class="proj-body">
+            <h3>Angular Dashboard</h3>
+            <p class="proj-desc">
+              SPA con Angular, componenti riutilizzabili e consumo di API REST.
+            </p>
+            <div class="proj-tags">
+              <span class="ptag">Angular</span
+              ><span class="ptag">TypeScript</span
+              ><span class="ptag">CSS3</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj p5 reveal">
+          <div class="proj-top">
+            <span class="proj-cat">AI / Python</span>
+            <span class="proj-arrow">↗</span>
+          </div>
+          <div class="proj-body">
+            <h3>ML Project</h3>
+            <p class="proj-desc">
+              Modello di machine learning con Python per classificazione e
+              predizione dati.
+            </p>
+            <div class="proj-tags">
+              <span class="ptag">Python</span><span class="ptag">ML</span
+              ><span class="ptag">AI</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj p6 reveal">
+          <div class="proj-top">
+            <span class="proj-cat">Java EE</span>
+            <span class="proj-arrow">↗</span>
+          </div>
+          <div class="proj-body">
+            <h3>Enterprise App</h3>
+            <p class="proj-desc">
+              Applicazione Java EE con architettura MVC, gestione sessioni e
+              persistenza dati con JPA.
+            </p>
+            <div class="proj-tags">
+              <span class="ptag">Java EE</span><span class="ptag">JPA</span
+              ><span class="ptag">MySQL</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── CONTACT ── -->
+    <div class="contact-section" id="contact">
+      <div class="contact-left reveal-left">
+        <span class="sec-num">04 — Contact</span>
+        <h2>
+          Costruiamo<br /><span
+            style="
+              background: linear-gradient(120deg, var(--violet2), var(--rose));
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              background-clip: text;
+            "
+            >qualcosa.</span
+          >
+        </h2>
+        <p style="margin-top: 1.5rem">
+          Aperto a opportunità in Full Stack, AI, Mobile e Cloud. Scrivimi,
+          rispondo entro 24h.
+        </p>
+      </div>
+      <div class="contact-right reveal-right">
+        <a href="mailto:federicocresci63coll@email.com" class="clink">
+          <span class="clink-icon ci-em">
+            <svg
+              width="18"
+              height="18"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+              />
+              <polyline points="22,6 12,13 2,6" />
+            </svg>
+          </span>
+          <span class="clink-text">
+            <span class="clink-label">Email</span>
+            <span class="clink-value">federicocresci63coll@gmail.com</span>
+          </span>
+          <span class="clink-arrow">→</span>
+        </a>
+        <a
+          href="https://www.linkedin.com/in/federico-cresci-b5853830b/"
+          class="clink"
+          target="_blank"
+        >
+          <span class="clink-icon ci-li">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7H10V9h4v1.5A5 5 0 0 1 16 8z"
+              />
+              <rect x="2" y="9" width="4" height="12" />
+              <circle cx="4" cy="4" r="2" />
+            </svg>
+          </span>
+          <span class="clink-text">
+            <span class="clink-label">LinkedIn</span>
+            <span class="clink-value">linkedin.com/in/FedericoCresci</span>
+          </span>
+          <span class="clink-arrow">→</span>
+        </a>
+        <a href="https://github.com/federico-dot" class="clink" target="_blank">
+          <span class="clink-icon ci-gh">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.49.5.09.66-.22.66-.48v-1.7C6.73 19.91 6.14 18 6.14 18c-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.99 1.03-2.69-.1-.26-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 6.8c.85 0 1.71.11 2.51.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.38.1 2.64.64.7 1.03 1.6 1.03 2.69 0 3.85-2.34 4.7-4.57 4.95.36.31.68.92.68 1.85v2.74c0 .27.16.58.67.48A10.01 10.01 0 0 0 22 12c0-5.52-4.48-10-10-10z"
+              />
+            </svg>
+          </span>
+          <span class="clink-text">
+            <span class="clink-label">GitHub</span>
+            <span class="clink-value">github.com/federico-dot</span>
+          </span>
+          <span class="clink-arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <span class="foot-left">© 2025 Federico — Developer & AI Engineer</span>
+      <div class="foot-right">
+        <a href="#about">About</a>
+        <a href="#skills">Stack</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </footer>
+
+    <script src="../js/app.js" type="module"></script>
+  </body>
+</html>
