@@ -1,0 +1,109 @@
+.hero {
+  position: relative;
+  display: flex;
+  min-height: 100svh;
+  align-items: center;
+  overflow: hidden;
+  padding: clamp(24px, 4vw, 72px);
+  background:
+    linear-gradient(
+      180deg,
+      rgba(14, 16, 22, 0.16),
+      rgba(14, 16, 22, 0.44)
+    ),
+    url("../../assets/img/hero.jpg") center / cover no-repeat;
+}
+
+.hero__content {
+  width: 100%;
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity 900ms ease 450ms,
+    transform 1.1s var(--intro-easing) 350ms;
+}
+
+body.intro-finished .hero__content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero__eyebrow {
+  margin: 0 0 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18rem;
+  text-transform: uppercase;
+}
+
+.hero__title {
+  display: flex;
+  max-width: 1200px;
+  margin: 0;
+  font-size: clamp(3.8rem, 10vw, 10rem);
+  font-weight: 700;
+  line-height: 0.84;
+  letter-spacing: -0.075em;
+  align-items: center;
+  justify-content: center;
+}
+
+/* INTRO */
+.intro {
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+  overflow: hidden;
+  background: #0e1016;
+  transform: translateY(0);
+  transition: transform var(--intro-duration) var(--intro-easing);
+  will-change: transform;
+}
+
+.intro.is-leaving {
+  transform: translateY(100%);
+}
+.intro__message {
+  position: absolute;
+  top: 54%;
+  left: 50%;
+  width: calc(100vw - 48px);
+  height: clamp(60px, 8vw, 100px);
+  margin: 0;
+  transform: translate(-50%, -50%);
+}
+
+.intro__word {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  opacity: 0;
+  filter: blur(8px);
+  transform: translateY(45px);
+  font-size: clamp(2rem, 3.4vw, 4rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.055em;
+  text-align: center;
+  white-space: nowrap;
+  transition:
+    opacity 700ms ease,
+    filter 800ms ease,
+    transform 950ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, filter, transform;
+}
+
+.intro__word.is-visible {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+}
+
+.intro__word.is-exiting {
+  opacity: 0;
+  filter: blur(5px);
+  transform: translateY(-45px);
+}

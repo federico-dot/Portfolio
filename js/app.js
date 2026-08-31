@@ -1,3 +1,3 @@
-import { setup } from "./event.js";
-
-setup();
+document.addEventListener("DOMContentLoaded", () => {
+  setup();
+});
