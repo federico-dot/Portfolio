@@ -1,5 +1,6 @@
 @import url("sezioni/hero.css");
 @import url("responsive/responsive.css");
+@import url("sezioni/about.css");
 
 :root {
   --background: #0e1016;
