@@ -1,7 +1,9 @@
 @import url("sezioni/hero.css");
 @import url("responsive/responsive.css");
 @import url("sezioni/about.css");
-
+@import url("sezioni/tooltip.css");
+@import url("sezioni/card.css");
+@import url("sezioni/cursor.css");
 :root {
   --background: #0e1016;
   --foreground: #f1efea;

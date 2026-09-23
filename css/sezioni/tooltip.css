@@ -1,0 +1,61 @@
+.is-color-inverted {
+  backdrop-filter: invert(1);
+  -webkit-backdrop-filter: invert(1);
+}
+
+.tooltip {
+  position: fixed;
+  z-index: 1000;
+  max-width: min(280px, calc(100vw - 32px));
+  padding: 10px 14px;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  background: transparent;
+  color: #050506;
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1.25;
+  pointer-events: none;
+  opacity: 0;
+  text-shadow: 0 1px 3px var(--background);
+  transform: translateY(8px);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+.tooltip.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.has-custom-cursor .tooltip.is-color-inverted {
+  z-index: 1004;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  text-shadow: none;
+  mix-blend-mode: difference;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  transform: none;
+  transition: opacity 0.2s ease;
+}
+
+.has-custom-cursor .tooltip.is-color-inverted.is-visible {
+  transition: opacity 0.25s ease 0.4s;
+}
+
+.hero__portrait:focus-visible {
+  outline: 2px solid var(--foreground);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tooltip,
+  .has-custom-cursor .tooltip.is-color-inverted,
+  .has-custom-cursor .tooltip.is-color-inverted.is-visible {
+    transition-duration: 0.01ms;
+    transition-delay: 0ms;
+  }
+}

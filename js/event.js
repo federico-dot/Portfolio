@@ -3,6 +3,53 @@ function wait(milliseconds) {
     window.setTimeout(resolve, milliseconds);
   });
 }
+function initScrollReveal({
+  selector = ".scroll-reveal",
+  activeClass = "is-visible",
+  threshold = 0.15,
+  rootMargin = "0px 0px -10% 0px",
+  staggerDelay = 100,
+} = {}) {
+  const elements = [...document.querySelectorAll(selector)];
+
+  if (elements.length === 0) return;
+
+  const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+
+  if (reducedMotion || !("IntersectionObserver" in window)) {
+    elements.forEach((element) => {
+      element.classList.add(activeClass);
+    });
+
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+
+        entry.target.classList.add(activeClass);
+        observer.unobserve(entry.target);
+      });
+    },
+    {
+      threshold,
+      rootMargin,
+    },
+  );
+
+  elements.forEach((element, index) => {
+    element.style.setProperty(
+      "--reveal-delay",
+      `${(index % 3) * staggerDelay}ms`,
+    );
+
+    observer.observe(element);
+  });
+}
 
 async function playIntro({
   introSelector = ".intro",
@@ -207,7 +254,248 @@ function initTypingSection({
   observer.observe(section);
 }
 
+function inverter_color(element, enabled = true) {
+  element.classList.toggle("is-color-inverted", enabled);
+  return element;
+}
+
+let cursorController = null;
+
+function initCursor() {
+  if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+
+  const outer = document.createElement("div");
+  const inner = document.createElement("div");
+  outer.className = "custom-cursor custom-cursor--outer";
+  inner.className = "custom-cursor custom-cursor--inner";
+  outer.setAttribute("aria-hidden", "true");
+  inner.setAttribute("aria-hidden", "true");
+  inverter_color(outer);
+  inverter_color(inner);
+  document.body.append(outer, inner);
+  document.documentElement.classList.add("has-custom-cursor");
+
+  const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+  let targetX = 0;
+  let targetY = 0;
+  let outerX = 0;
+  let outerY = 0;
+  let frame = 0;
+  let visible = false;
+  let pointerX = 0;
+  let pointerY = 0;
+  let engulfedElement = null;
+  let tooltipBox = null;
+
+  function place(element, x, y) {
+    element.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
+  }
+
+  function placeOuter() {
+    place(outer, outerX, outerY);
+
+    if (tooltipBox && activeTooltip) {
+      activeTooltip.style.left = `${outerX - tooltipBox.width / 2}px`;
+      activeTooltip.style.top = `${outerY - tooltipBox.height / 2}px`;
+    }
+  }
+
+  function updateOuterMode() {
+    if (tooltipBox) {
+      outer.style.width = `${tooltipBox.width}px`;
+      outer.style.height = `${tooltipBox.height}px`;
+      outer.style.borderRadius = "8px";
+      targetX = tooltipBox.left + tooltipBox.width / 2;
+      targetY = tooltipBox.top + tooltipBox.height / 2;
+    } else if (engulfedElement?.isConnected) {
+      const bounds = engulfedElement.getBoundingClientRect();
+      outer.style.width = `${bounds.width + 16}px`;
+      outer.style.height = `${bounds.height + 16}px`;
+      outer.style.borderRadius =
+        window.getComputedStyle(engulfedElement).borderRadius || "8px";
+      targetX = bounds.left + bounds.width / 2;
+      targetY = bounds.top + bounds.height / 2;
+    } else {
+      outer.style.width = "";
+      outer.style.height = "";
+      outer.style.borderRadius = "";
+      targetX = pointerX;
+      targetY = pointerY;
+    }
+
+    if (reducedMotion) {
+      outerX = targetX;
+      outerY = targetY;
+      placeOuter();
+    } else if (!frame) {
+      frame = window.requestAnimationFrame(animateOuter);
+    }
+  }
+
+  function animateOuter() {
+    outerX += (targetX - outerX) * 0.22;
+    outerY += (targetY - outerY) * 0.22;
+    placeOuter();
+
+    if (Math.abs(targetX - outerX) > 0.2 || Math.abs(targetY - outerY) > 0.2) {
+      frame = window.requestAnimationFrame(animateOuter);
+    } else {
+      frame = 0;
+    }
+  }
+
+  window.addEventListener("pointermove", (event) => {
+    if (event.pointerType !== "mouse") return;
+
+    pointerX = event.clientX;
+    pointerY = event.clientY;
+    engulfedElement =
+      event.target instanceof Element
+        ? event.target.closest(".cursor--inglobe")
+        : null;
+    place(inner, pointerX, pointerY);
+
+    if (!visible) {
+      outerX = pointerX;
+      outerY = pointerY;
+      placeOuter();
+      outer.classList.add("is-visible");
+      visible = true;
+    }
+
+    inner.classList.add("is-visible");
+    updateOuterMode();
+  });
+
+  cursorController = {
+    showTooltip(box) {
+      tooltipBox = box;
+      updateOuterMode();
+
+      if (!visible) {
+        outerX = targetX;
+        outerY = targetY;
+        placeOuter();
+        outer.classList.add("is-visible");
+        visible = true;
+      }
+    },
+    hideTooltip() {
+      tooltipBox = null;
+      updateOuterMode();
+    },
+  };
+
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (engulfedElement && !tooltipBox) updateOuterMode();
+    },
+    true,
+  );
+
+  window.addEventListener("mouseout", (event) => {
+    if (event.relatedTarget) return;
+    hide_tooltip();
+    engulfedElement = null;
+    outer.classList.remove("is-visible");
+    inner.classList.remove("is-visible");
+    visible = false;
+  });
+}
+
+let activeTooltip = null;
+let tooltipClickEvent = null;
+
+function hide_tooltip() {
+  if (!activeTooltip) return;
+  activeTooltip.classList.remove("is-visible");
+  activeTooltip.setAttribute("aria-hidden", "true");
+  cursorController?.hideTooltip();
+}
+
+function tooltip(text, sourceEvent = tooltipClickEvent) {
+  if (!activeTooltip) {
+    activeTooltip = document.createElement("div");
+    activeTooltip.className = "tooltip";
+    activeTooltip.setAttribute("role", "tooltip");
+    inverter_color(activeTooltip);
+    document.body.append(activeTooltip);
+  }
+
+  activeTooltip.textContent = String(text);
+
+  const anchor =
+    sourceEvent?.currentTarget instanceof Element
+      ? sourceEvent.currentTarget
+      : document.activeElement;
+  const bounds = anchor?.getBoundingClientRect();
+  const fromPointer =
+    sourceEvent &&
+    (sourceEvent.type.startsWith("pointer") || sourceEvent.detail > 0) &&
+    Number.isFinite(sourceEvent.clientX) &&
+    Number.isFinite(sourceEvent.clientY);
+  const gap = 16;
+  const x = fromPointer
+    ? sourceEvent.clientX + gap
+    : bounds
+      ? bounds.left + bounds.width / 2 - activeTooltip.offsetWidth / 2
+      : (window.innerWidth - activeTooltip.offsetWidth) / 2;
+  const y = fromPointer
+    ? sourceEvent.clientY + gap
+    : bounds
+      ? bounds.bottom + gap
+      : (window.innerHeight - activeTooltip.offsetHeight) / 2;
+
+  const left = Math.max(
+    gap,
+    Math.min(x, window.innerWidth - activeTooltip.offsetWidth - gap),
+  );
+  const top = Math.max(
+    gap,
+    Math.min(y, window.innerHeight - activeTooltip.offsetHeight - gap),
+  );
+  activeTooltip.style.left = `${left}px`;
+  activeTooltip.style.top = `${top}px`;
+  cursorController?.showTooltip({
+    left,
+    top,
+    width: activeTooltip.offsetWidth,
+    height: activeTooltip.offsetHeight,
+  });
+  activeTooltip.classList.add("is-visible");
+  activeTooltip.setAttribute("aria-hidden", "false");
+  return activeTooltip;
+}
+
+function initTooltip() {
+  document.addEventListener(
+    "click",
+    (event) => {
+      hide_tooltip();
+      tooltipClickEvent = event;
+      queueMicrotask(() => {
+        if (tooltipClickEvent === event) tooltipClickEvent = null;
+      });
+    },
+    true,
+  );
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") hide_tooltip();
+  });
+}
+
+let isSetupComplete = false;
+
 function setup() {
+  if (isSetupComplete) return;
+  isSetupComplete = true;
+
+  initCursor();
+  initTooltip();
   initScrollReveal({
     selector: ".projects .scroll-reveal",
     threshold: 0.15,
@@ -221,6 +509,7 @@ function setup() {
 
   initPointerFollow({
     selector: ".hero__portrait",
+
     maximumMovement: 90,
   });
 
@@ -232,7 +521,7 @@ function setup() {
     pauseBetweenElements: 160,
   });
 }
-// prova
+
 function initScrollReveal({
   selector = ".scroll-reveal",
   activeClass = "is-visible",

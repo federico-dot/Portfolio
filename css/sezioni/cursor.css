@@ -1,0 +1,51 @@
+@media (hover: hover) and (pointer: fine) {
+  .has-custom-cursor,
+  .has-custom-cursor * {
+    cursor: none !important;
+  }
+}
+
+.custom-cursor {
+  position: fixed;
+  z-index: 1002;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  opacity: 0;
+  border-radius: 50%;
+  transition: opacity 150ms ease;
+  will-change: transform;
+}
+
+.custom-cursor.is-color-inverted {
+  background: #fff;
+  mix-blend-mode: difference;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.custom-cursor.is-visible {
+  opacity: 1;
+}
+
+.custom-cursor--outer {
+  width: var(--cursor-outer-size, 42px);
+  height: var(--cursor-outer-size, 42px);
+  transition:
+    opacity 150ms ease,
+    width 0.7s ease,
+    height 0.7s ease,
+    border-radius 0.7s ease;
+}
+
+.custom-cursor--inner {
+  width: var(--cursor-inner-size, 10px);
+  height: var(--cursor-inner-size, 10px);
+  z-index: 1003;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .custom-cursor {
+    transition-duration: 0.01ms;
+  }
+}

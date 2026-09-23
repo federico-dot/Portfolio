@@ -62,12 +62,6 @@ body.intro-finished .hero__content {
     background-color 200ms ease;
 }
 
-.hero__button:hover,
-.hero__button:focus-visible {
-  color: #0e1016;
-  background-color: #e7e1da;
-}
-
 .hero__links {
   display: flex;
   gap: clamp(28px, 5vw, 90px);
@@ -339,10 +333,7 @@ body.intro-finished .hero__content {
   .hero__portrait {
     top: 45%;
     width: min(62vw, 255px);
-    transform: translate(
-      calc(-50% + var(--move-x, 0px)),
-      var(--move-y, 0px)
-    );
+    transform: translate(calc(-50% + var(--move-x, 0px)), var(--move-y, 0px));
   }
 
   .hero__footer {
