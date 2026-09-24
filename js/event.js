@@ -94,53 +94,6 @@ async function playIntro({
   intro.addEventListener("transitionend", removeIntro);
 }
 
-function initPointerFollow({
-  selector = ".hero__portrait",
-  maximumMovement = 90,
-} = {}) {
-  const element = document.querySelector(selector);
-
-  if (!element) return;
-
-  let elementRect = null;
-
-  function updateElementRect() {
-    elementRect = element.getBoundingClientRect();
-  }
-
-  function handlePointerMove(event) {
-    if (!elementRect) {
-      updateElementRect();
-    }
-
-    const centerX = elementRect.left + elementRect.width / 2;
-    const centerY = elementRect.top + elementRect.height / 2;
-
-    const normalizedX = (event.clientX - centerX) / (elementRect.width / 2);
-
-    const normalizedY = (event.clientY - centerY) / (elementRect.height / 2);
-
-    const moveX = normalizedX * maximumMovement;
-    const moveY = normalizedY * maximumMovement;
-
-    element.style.setProperty("--move-x", `${moveX}px`);
-    element.style.setProperty("--move-y", `${moveY}px`);
-  }
-
-  function resetPosition() {
-    element.style.setProperty("--move-x", "0px");
-    element.style.setProperty("--move-y", "0px");
-
-    elementRect = null;
-  }
-
-  element.addEventListener("pointerenter", updateElementRect);
-  element.addEventListener("pointermove", handlePointerMove);
-  element.addEventListener("pointerleave", resetPosition);
-
-  window.addEventListener("resize", updateElementRect);
-}
-
 async function typeText(
   element,
   { defaultSpeed = 70, randomDelayMaximum = 35, cursorEndDelay = 220 } = {},
@@ -286,8 +239,55 @@ function initCursor() {
   let visible = false;
   let pointerX = 0;
   let pointerY = 0;
+  let stickyElement = null;
   let engulfedElement = null;
   let tooltipBox = null;
+  const engulfPadding = 8;
+  const cursorAttraction = 0.3;
+  const stickyMovement = 0.08;
+  const stickyMaximumMovement = 6;
+  const stickyReleaseDistance = 10;
+
+  function resetStickyElement(element) {
+    if (!element) return;
+
+    element.classList.remove("is-sticking");
+    element.style.setProperty("--sticky-x", "0px");
+    element.style.setProperty("--sticky-y", "0px");
+  }
+
+  function moveStickyElement(element, event) {
+    if (!element || reducedMotion) return;
+
+    const bounds = element.getBoundingClientRect();
+    const centerX = bounds.left + bounds.width / 2;
+    const centerY = bounds.top + bounds.height / 2;
+    const moveX = Math.max(
+      -stickyMaximumMovement,
+      Math.min(stickyMaximumMovement, (event.clientX - centerX) * stickyMovement),
+    );
+    const moveY = Math.max(
+      -stickyMaximumMovement,
+      Math.min(stickyMaximumMovement, (event.clientY - centerY) * stickyMovement),
+    );
+
+    element.classList.add("is-sticking");
+    element.style.setProperty("--sticky-x", `${moveX}px`);
+    element.style.setProperty("--sticky-y", `${moveY}px`);
+  }
+
+  function isInsideStickyReleaseArea(element, event) {
+    if (!element?.isConnected) return false;
+
+    const bounds = element.getBoundingClientRect();
+
+    return (
+      event.clientX >= bounds.left - stickyReleaseDistance &&
+      event.clientX <= bounds.right + stickyReleaseDistance &&
+      event.clientY >= bounds.top - stickyReleaseDistance &&
+      event.clientY <= bounds.bottom + stickyReleaseDistance
+    );
+  }
 
   function place(element, x, y) {
     element.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
@@ -311,8 +311,8 @@ function initCursor() {
       targetY = tooltipBox.top + tooltipBox.height / 2;
     } else if (engulfedElement?.isConnected) {
       const bounds = engulfedElement.getBoundingClientRect();
-      outer.style.width = `${bounds.width + 16}px`;
-      outer.style.height = `${bounds.height + 16}px`;
+      outer.style.width = `${bounds.width + engulfPadding}px`;
+      outer.style.height = `${bounds.height + engulfPadding}px`;
       outer.style.borderRadius =
         window.getComputedStyle(engulfedElement).borderRadius || "8px";
       targetX = bounds.left + bounds.width / 2;
@@ -335,8 +335,8 @@ function initCursor() {
   }
 
   function animateOuter() {
-    outerX += (targetX - outerX) * 0.22;
-    outerY += (targetY - outerY) * 0.22;
+    outerX += (targetX - outerX) * cursorAttraction;
+    outerY += (targetY - outerY) * cursorAttraction;
     placeOuter();
 
     if (Math.abs(targetX - outerX) > 0.2 || Math.abs(targetY - outerY) > 0.2) {
@@ -351,10 +351,29 @@ function initCursor() {
 
     pointerX = event.clientX;
     pointerY = event.clientY;
+    let nextStickyElement =
+      event.target instanceof Element
+        ? event.target.closest(".sticky")
+        : null;
+
+    if (
+      !nextStickyElement &&
+      isInsideStickyReleaseArea(stickyElement, event)
+    ) {
+      nextStickyElement = stickyElement;
+    }
+
+    if (stickyElement !== nextStickyElement) {
+      resetStickyElement(stickyElement);
+      stickyElement = nextStickyElement;
+    }
+
     engulfedElement =
       event.target instanceof Element
         ? event.target.closest(".cursor--inglobe")
         : null;
+
+    moveStickyElement(stickyElement, event);
     place(inner, pointerX, pointerY);
 
     if (!visible) {
@@ -399,6 +418,8 @@ function initCursor() {
   window.addEventListener("mouseout", (event) => {
     if (event.relatedTarget) return;
     hide_tooltip();
+    resetStickyElement(stickyElement);
+    stickyElement = null;
     engulfedElement = null;
     outer.classList.remove("is-visible");
     inner.classList.remove("is-visible");
@@ -505,12 +526,6 @@ function setup() {
     initialDelay: 250,
     visibleDuration: 700,
     exitDuration: 500,
-  });
-
-  initPointerFollow({
-    selector: ".hero__portrait",
-
-    maximumMovement: 90,
   });
 
   initTypingSection({
