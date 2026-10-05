@@ -264,11 +264,17 @@ function initCursor() {
     const centerY = bounds.top + bounds.height / 2;
     const moveX = Math.max(
       -stickyMaximumMovement,
-      Math.min(stickyMaximumMovement, (event.clientX - centerX) * stickyMovement),
+      Math.min(
+        stickyMaximumMovement,
+        (event.clientX - centerX) * stickyMovement,
+      ),
     );
     const moveY = Math.max(
       -stickyMaximumMovement,
-      Math.min(stickyMaximumMovement, (event.clientY - centerY) * stickyMovement),
+      Math.min(
+        stickyMaximumMovement,
+        (event.clientY - centerY) * stickyMovement,
+      ),
     );
 
     element.classList.add("is-sticking");
@@ -352,14 +358,9 @@ function initCursor() {
     pointerX = event.clientX;
     pointerY = event.clientY;
     let nextStickyElement =
-      event.target instanceof Element
-        ? event.target.closest(".sticky")
-        : null;
+      event.target instanceof Element ? event.target.closest(".sticky") : null;
 
-    if (
-      !nextStickyElement &&
-      isInsideStickyReleaseArea(stickyElement, event)
-    ) {
+    if (!nextStickyElement && isInsideStickyReleaseArea(stickyElement, event)) {
       nextStickyElement = stickyElement;
     }
 
@@ -446,7 +447,9 @@ function tooltip(text, sourceEvent = tooltipClickEvent) {
     document.body.append(activeTooltip);
   }
 
-  activeTooltip.textContent = String(text);
+  activeTooltip.textContent = window.translatePortfolioTooltip
+    ? window.translatePortfolioTooltip(String(text))
+    : String(text);
 
   const anchor =
     sourceEvent?.currentTarget instanceof Element
