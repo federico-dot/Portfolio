@@ -183,9 +183,11 @@ window.translatePortfolioTooltip = (text) => {
     return language === "it" ? "Guarda i miei progetti" : "View my projects";
   }
 
-  if (text.toLowerCase().includes("linkedin")) {
+  if (text.toLowerCase().includes("linkedIn")) {
     return language === "it" ? "Guarda il mio LinkedIn" : "View my LinkedIn";
   }
-
+  if (text.toLowerCase().includes("Mandami un Email")) {
+    return language === "it" ? "Mandami un' Email" : "Send me an Email";
+  }
   return text;
 };

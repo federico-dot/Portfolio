@@ -24,12 +24,18 @@
     <main class="hero">
       <div class="hero__content">
         <nav class="hero__nav" aria-label="Navigazione Principale">
-          <a href="#contatti" class="hero__button cursor--inglobe sticky"> </a>
+          <a
+            href="mailto:federicocresci.dev@gmail.com"
+            class="hero__button cursor--inglobe sticky"
+            onpointerenter="tooltip('Mandami un Email', event)"
+            onpointermove="tooltip('Mandami un Email', event)"
+            onpointerleave="hide_tooltip()"
+          ></a>
           <div class="hero__links">
             <a
               href="#progetti"
               class="hero__link sticky"
-              onpointerenter="tooltip('Guarda i miei progetto', event)"
+              onpointerenter="tooltip('Guarda i miei progetti', event)"
               onpointermove="tooltip('Guarda i miei progetti', event)"
               onpointerleave="hide_tooltip()"
             ></a>
@@ -40,7 +46,7 @@
               onpointerenter="tooltip('Guarda il mio linkedin', event)"
               onpointermove="tooltip('Guarda il mio Linkedin', event)"
               onpointerleave="hide_tooltip()"
-              >Linkedin</a
+              >LinkedIn</a
             >
           </div>
         </nav>
@@ -57,7 +63,7 @@
         >
           <img
             src="./assets/img/avatar_triste.png"
-            alt="Ritratto illustrto di Federico Cresci"
+            alt="Ritratto illustrato di Federico Cresci"
             onpointerenter="tooltip('Federico Cresci', event)"
             onpointermove="tooltip('Federico Cresci', event)"
             onpointerleave="hide_tooltip()"
