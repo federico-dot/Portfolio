@@ -269,15 +269,23 @@ body.intro-finished .hero__content {
 /* RESPONSIVE */
 
 @media (max-width: 900px) {
+  .hero,
+  .hero__content {
+    min-height: max(100svh, 680px);
+  }
+
   .hero__title {
-    top: 22px;
+    top: 10%;
     font-size: clamp(5rem, 18vw, 9rem);
     line-height: 0.93;
   }
 
   .hero__portrait {
-    top: 49px;
-    width: clamp(210px, 34vw, 290px);
+    top: 55%;
+    left: 50%;
+    width: min(62vw, 255px);
+    margin: 0;
+    transform: translateX(-50%);
   }
 
   .hero__description {
@@ -301,7 +309,7 @@ body.intro-finished .hero__content {
 @media (max-width: 620px) {
   .hero,
   .hero__content {
-    min-height: 900px;
+    min-height: max(100svh, 680px);
   }
 
   .hero__nav {
@@ -325,15 +333,17 @@ body.intro-finished .hero__content {
   }
 
   .hero__title {
-    top: 20%;
-    font-size: 4.7rem;
-    line-height: 0.96;
+    top: 10%;
+    font-size: clamp(4rem, 18vw, 7rem);
+    line-height: 0.93;
   }
 
   .hero__portrait {
-    top: 45%;
+    top: 47%;
+    left: 50%;
     width: min(62vw, 255px);
-    transform: translate(calc(-50% + var(--move-x, 0px)), var(--move-y, 0px));
+    margin: 0;
+    transform: translateX(-50%);
   }
 
   .hero__footer {
